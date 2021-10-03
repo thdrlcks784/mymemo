@@ -15,6 +15,8 @@ class MemoListViewModel (
 
         private var memoList = MutableLiveData<Memo?>()
 
+        val allMemoList = database.getALLMemo()
+
         init{ initializeMemoList() }
 
         private fun initializeMemoList(){
@@ -27,12 +29,7 @@ class MemoListViewModel (
                 return memo
         }
 
-        fun onCreateMemo(){
-                viewModelScope.launch {
-                        val newMemo = Memo()
-                        insert(newMemo)
-                }
-        }
+
 
         private suspend fun insert(newMemo: Memo) {
                 database.insert(newMemo)

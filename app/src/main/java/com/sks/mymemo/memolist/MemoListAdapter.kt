@@ -19,15 +19,14 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
 
     override fun onBindViewHolder(holder: ItemMemoListViewHolder, position: Int) {
         val item = data[position]
-        holder.textView.text = item.title.toString()
-        holder.textView.text = item.dateTimeMill.toString()
-        holder.textView.text = item.contents.toString()
+        holder?.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMemoListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.item_memo_list,parent,false) as TextView
+        val view = layoutInflater.inflate(R.layout.item_memo_list,parent,false)
         return ItemMemoListViewHolder(view)
     }
+
 
 }

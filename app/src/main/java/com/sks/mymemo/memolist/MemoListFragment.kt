@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.sks.mymemo.R
@@ -29,8 +30,9 @@ class MemoListFragment : Fragment(){
             view.findNavController().navigate(R.id.action_memoListFragment_to_addMemoFragment)
         }
 
-        //val adapter = MemoListAdapter()
-        //binding.memoList.adapter = adapter
+
+        val adapter = MemoListAdapter()
+        binding.memoList.adapter = adapter
 
         //애플리케이션 컨텍스트에 대한 참조를 가져옴
         val application = requireNotNull(this.activity).application
@@ -39,6 +41,12 @@ class MemoListFragment : Fragment(){
         val viewModelFactory = MemoListViewModelFactory(dataSource,application)
 
         val memoListViewModel = ViewModelProvider(this, viewModelFactory).get(MemoListViewModel::class.java)
+
+        memoListViewModel.allMemoList.observe(viewLifecycleOwner, Observer{
+            it?.let{
+                adapter.data = it
+            }
+        })
 
         binding.memoListViewModel = memoListViewModel
 

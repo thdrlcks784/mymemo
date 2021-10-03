@@ -8,7 +8,5 @@ android:shape="rectangle" android:padding = "10dp">
     android:topLeftRadius="15dp"
     android:topRightRadius="15dp"></corners>
 
-<stroke
-    android:width="3dp"
-    android:color="#B0DCF8"></stroke>
+
 </shape>
