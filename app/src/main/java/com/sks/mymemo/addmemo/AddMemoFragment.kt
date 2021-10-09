@@ -1,19 +1,16 @@
 package com.sks.mymemo.addmemo
 
-import android.content.Context
+
 import android.os.Bundle
 import android.view.*
-import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.sks.mymemo.R
 import com.sks.mymemo.database.MemoDatabase
 import com.sks.mymemo.databinding.FragmentAddMemoBinding
-import com.sks.mymemo.memolist.MemoListViewModel
-import com.sks.mymemo.memolist.MemoListViewModelFactory
+
 
 
 class AddMemoFragment : Fragment(){

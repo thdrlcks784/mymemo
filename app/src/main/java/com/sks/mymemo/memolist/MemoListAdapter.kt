@@ -1,12 +1,15 @@
 package com.sks.mymemo.memolist
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sks.mymemo.ItemMemoListViewHolder
 import com.sks.mymemo.R
 import com.sks.mymemo.database.Memo
+
 
 class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
     var data = listOf<Memo>()
@@ -17,9 +20,28 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
 
     override fun getItemCount() = data.size
 
+    fun getItem(position : Int) = data[position]
+
     override fun onBindViewHolder(holder: ItemMemoListViewHolder, position: Int) {
         val item = data[position]
         holder?.bind(item)
+
+        holder.itemView.setOnClickListener(object : View.OnClickListener{
+            override fun onClick(v: View?) {
+                val memoTimeMill = item.dateTimeMill
+                val action = MemoListFragmentDirections.actionMemoListFragmentToUpdateMemoFragment(memoTimeMill)
+                v!!.findNavController().navigate(action)
+
+            }
+        })
+
+        holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
+            override fun onLongClick(p0: View?): Boolean {
+                //val timeMill = data.get(getItemId())
+                Log.d("TAG","롱클릭 테스트${item.dateTimeMill}")
+                return true
+            }
+        })
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMemoListViewHolder {

@@ -17,6 +17,7 @@ class MemoListViewModel (
 
         val allMemoList = database.getALLMemo()
 
+
         init{ initializeMemoList() }
 
         private fun initializeMemoList(){
@@ -30,10 +31,11 @@ class MemoListViewModel (
         }
 
 
-
         private suspend fun insert(newMemo: Memo) {
                 database.insert(newMemo)
         }
+
+
 
 }
 

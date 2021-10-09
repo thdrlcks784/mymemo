@@ -1,27 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/memoListFragment">
 
     <fragment
         android:id="@+id/memoListFragment"
         android:name="com.sks.mymemo.memolist.MemoListFragment"
-        android:label="MemoListFragment" >
+        android:label="MemoListFragment"
+        tools:layout="@layout/fragment_memo_list">
         <action
             android:id="@+id/action_memoListFragment_to_addMemoFragment"
             app:destination="@id/addMemoFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_memoListFragment_to_updateMemoFragment"
+            app:destination="@id/updateMemoFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
+
+        </action>
+        <argument
+            android:name="TimeMill"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/addMemoFragment"
         android:name="com.sks.mymemo.addmemo.AddMemoFragment"
-        android:label="AddMemoFragment" >
+        android:label="AddMemoFragment"
+        tools:layout="@layout/fragment_add_memo">
         <action
             android:id="@+id/action_addMemoFragment_to_memoListFragment"
+            app:destination="@id/memoListFragment"
+            app:popUpTo="@id/memoListFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/updateMemoFragment"
+        android:name="com.sks.mymemo.updatememo.UpdateMemoFragment"
+        android:label="UpdateMemoFragment"
+        tools:layout="@layout/fragment_update_memo">
+        <argument
+            android:name="TimeMill"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_updateMemoFragment_to_memoListFragment"
             app:destination="@id/memoListFragment"
             app:popUpTo="@id/memoListFragment"
             app:popUpToInclusive="true"

@@ -31,6 +31,8 @@ class AddMemoViewModel(
         }
     }
 
+
+
     private suspend fun insert(newMemo: Memo) {
         database.insert(newMemo)
     }
