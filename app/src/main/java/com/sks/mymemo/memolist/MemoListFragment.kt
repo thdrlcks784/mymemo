@@ -45,7 +45,7 @@ class MemoListFragment : Fragment(){
                 super.onChanged()
                 checkEmpty()
             }
-
+            
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 super.onItemRangeInserted(positionStart, itemCount)
                 checkEmpty()

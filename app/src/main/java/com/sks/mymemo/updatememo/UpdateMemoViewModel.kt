@@ -18,9 +18,9 @@ class UpdateMemoViewModel (
 
     var _memo = MutableLiveData<Memo?>()
 
-    fun onUpdateMemo(contents : String, title : String){
+    fun onUpdateMemo(contents : String, title : String,time : Long){
         viewModelScope.launch {
-            val newMemo = Memo(contents = contents,title = title)
+            val newMemo = Memo(contents = contents,title = title,dateTimeMill = time)
             
             update(newMemo)
         }

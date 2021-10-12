@@ -46,20 +46,11 @@ class UpdateMemoFragment : Fragment() {
         })
 
 
-        //받아온 timeMill(key값)으로 memoDatabaseDao에서 해당 MemoList 호출
-        //updateMemoViewModel.onReCreateMemo(timeMill)
-
-
-        //updateMemoViewModel.onReCreateMemo()
-
-        //binding.updateMemoTitle.setText(updateMemoViewModel.title())
-        //binding.updateMemoContents.setText(updateMemoViewModel._memo.contents)
-
         binding.updateMemoViewModel = updateMemoViewModel
 
         binding.updateMemoFab.setOnClickListener{ view: View ->
             view.findNavController().navigate(R.id.action_updateMemoFragment_to_memoListFragment)
-            updateMemoViewModel.onUpdateMemo(binding.updateMemoContents.text.toString(),binding.updateMemoTitle.text.toString())
+            updateMemoViewModel.onUpdateMemo(binding.updateMemoContents.text.toString(),binding.updateMemoTitle.text.toString(),timeMill)
         }
         binding.lifecycleOwner = this
         //setHasOptionsMenu(true)
