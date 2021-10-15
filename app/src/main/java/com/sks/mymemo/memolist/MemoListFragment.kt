@@ -4,18 +4,26 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.sks.mymemo.MainActivity
 import com.sks.mymemo.R
+import com.sks.mymemo.database.Memo
 import com.sks.mymemo.database.MemoDatabase
 import com.sks.mymemo.databinding.FragmentMemoListBinding
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_memo_list.*
+import kotlinx.android.synthetic.main.item_memo_list.*
 
 class MemoListFragment : Fragment(){
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,36 +41,10 @@ class MemoListFragment : Fragment(){
             view.findNavController().navigate(R.id.action_memoListFragment_to_addMemoFragment)
         }
 
-
         //item이 없을때 띄워줄 EmptyTextView
         val adapter = MemoListAdapter()
-        binding.itemEmptyText.visibility = View.GONE
+        //binding.itemEmptyText.visibility = View.GONE
         binding.memoList.adapter = adapter
-        //item이 없거나 없어졌을때 EmptyTextView를 띄우기 위함
-        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
-
-            override fun onChanged() {
-                super.onChanged()
-                checkEmpty()
-            }
-            
-            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-                super.onItemRangeInserted(positionStart, itemCount)
-                checkEmpty()
-            }
-
-            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
-                super.onItemRangeRemoved(positionStart, itemCount)
-                checkEmpty()
-            }
-            //item이 없을때 띄워줄 EmptyTextView
-            fun checkEmpty(){
-                item_empty_text.visibility = (if(adapter.itemCount==0)View.VISIBLE else View.GONE)
-            }
-
-
-        })
-
 
 
         //애플리케이션 컨텍스트에 대한 참조를 가져옴
@@ -79,9 +61,36 @@ class MemoListFragment : Fragment(){
             }
         })
 
-        binding.memoListViewModel = memoListViewModel
+        //(requireActivity() as MainActivity).toolbar.
+
+
+        //item이 없거나 없어졌을때 EmptyTextView를 띄우기 위함
+        adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
+
+            override fun onChanged() {
+                super.onChanged()
+                checkEmpty()
+            }
+
+            override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                super.onItemRangeInserted(positionStart, itemCount)
+                checkEmpty()
+            }
+
+            override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
+                super.onItemRangeRemoved(positionStart, itemCount)
+                checkEmpty()
+            }
+            //item이 없을때 띄워줄 EmptyTextView
+            fun checkEmpty(){
+                item_empty_text.visibility = (if(adapter.itemCount==0)View.VISIBLE else View.GONE)
+            }
+        })
+
 
         return binding.root
     }
+
+
 
 }

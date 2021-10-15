@@ -9,17 +9,23 @@ import java.util.*
 @Entity(tableName = "memo_table")
 data class Memo(
     @PrimaryKey(autoGenerate = true)
-    var dateTimeMill: Long = System.currentTimeMillis(),
+    val dateTimeMill: Long = System.currentTimeMillis(),
+
+    @ColumnInfo(name = "first_created_date")
+    val firstCreatedDate: String = SimpleDateFormat("yyyy년 MM월 dd일 kk:mm:ss (E)", Locale("Ko","KR")).format(Date(dateTimeMill)),
+
+    @ColumnInfo(name = "current_date")
+    val currentDateTimeMill: Long = dateTimeMill,
 
     @ColumnInfo(name = "memo_date")
-    var strDate: String = SimpleDateFormat("yyyy년 MM월 dd일 (E)", Locale("Ko","KR")).format(Date(dateTimeMill)),
-
-    @ColumnInfo(name = "memo_time")
-    var strTime: String = SimpleDateFormat("kk:mm", Locale("Ko","KR")).format(Date(dateTimeMill)),
+    var currentDate: String = SimpleDateFormat("yyyy년 MM월 dd일 kk:mm:ss (E)", Locale("Ko","KR")).format(Date(currentDateTimeMill)),
 
     @ColumnInfo(name = "memo_title")
     var title: String,
 
     @ColumnInfo(name = "memo_contents")
-    var contents : String
+    var contents : String,
+
+    @ColumnInfo(name = "memo_isVisibility")
+    var isVisibility : Boolean = false
 )

@@ -10,7 +10,6 @@ import com.sks.mymemo.ItemMemoListViewHolder
 import com.sks.mymemo.R
 import com.sks.mymemo.database.Memo
 
-
 class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
     var data = listOf<Memo>()
         set(value){
@@ -19,8 +18,6 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
         }
 
     override fun getItemCount() = data.size
-
-    fun getItem(position : Int) = data[position]
 
     override fun onBindViewHolder(holder: ItemMemoListViewHolder, position: Int) {
         val item = data[position]
@@ -36,9 +33,13 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
         })
 
         holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
-            override fun onLongClick(p0: View?): Boolean {
-                //val timeMill = data.get(getItemId())
+            override fun onLongClick(v: View?): Boolean {
                 Log.d("TAG","롱클릭 테스트${item.dateTimeMill}")
+                //MemoListViewModel().isVisibilityAllTrue()
+                for(index in 0..data.size-1){
+                    data[index].isVisibility = true
+                }
+                notifyDataSetChanged()
                 return true
             }
         })
@@ -49,6 +50,5 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
         val view = layoutInflater.inflate(R.layout.item_memo_list,parent,false)
         return ItemMemoListViewHolder(view)
     }
-
 
 }

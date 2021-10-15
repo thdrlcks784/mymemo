@@ -2,6 +2,7 @@ package com.sks.mymemo.memolist
 
 import android.app.Application
 import android.provider.SyncStateContract.Helpers.insert
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -23,6 +24,7 @@ class MemoListViewModel (
         private fun initializeMemoList(){
                 viewModelScope.launch{
                         memoList.value = getMemoListFromDatabase()
+                        Log.d("TAG","mewModel init ${database.getLastMemo()}")
                 }
         }
         private suspend fun getMemoListFromDatabase(): Memo?{
@@ -34,7 +36,6 @@ class MemoListViewModel (
         private suspend fun insert(newMemo: Memo) {
                 database.insert(newMemo)
         }
-
 
 
 }

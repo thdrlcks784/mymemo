@@ -22,6 +22,8 @@
             android:textSize="24sp"
             android:fontFamily="@font/nanum_barunpen_bold"
             android:layout_marginLeft="30dp"
+            android:background="@null"
+            android:inputType="text"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -44,6 +46,7 @@
             android:fontFamily="@font/nanum_barunpen_regular"
             android:hint="내용"
             android:textSize="16sp"
+            android:background="@null"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/line" />

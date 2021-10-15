@@ -20,8 +20,7 @@ class UpdateMemoViewModel (
 
     fun onUpdateMemo(contents : String, title : String,time : Long){
         viewModelScope.launch {
-            val newMemo = Memo(contents = contents,title = title,dateTimeMill = time)
-            
+            val newMemo = Memo(contents = contents,title = title,dateTimeMill = time,currentDateTimeMill = System.currentTimeMillis())
             update(newMemo)
         }
     }

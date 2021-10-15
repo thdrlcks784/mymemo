@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sks.mymemo.R
+import com.sks.mymemo.Util
 import com.sks.mymemo.database.MemoDatabase
 import com.sks.mymemo.databinding.FragmentUpdateMemoBinding
 import com.sks.mymemo.memolist.MemoListFragmentArgs
@@ -30,6 +31,8 @@ class UpdateMemoFragment : Fragment() {
         val args : UpdateMemoFragmentArgs by navArgs()
         val timeMill = args.TimeMill
 
+        //util
+        val util = Util()
 
         //애플리케이션 컨텍스트에 대한 참조를 가져옴
         val application = requireNotNull(this.activity).application
@@ -51,6 +54,7 @@ class UpdateMemoFragment : Fragment() {
         binding.updateMemoFab.setOnClickListener{ view: View ->
             view.findNavController().navigate(R.id.action_updateMemoFragment_to_memoListFragment)
             updateMemoViewModel.onUpdateMemo(binding.updateMemoContents.text.toString(),binding.updateMemoTitle.text.toString(),timeMill)
+            context?.let{ util.hideKeyboard(it,view) }
         }
         binding.lifecycleOwner = this
         //setHasOptionsMenu(true)

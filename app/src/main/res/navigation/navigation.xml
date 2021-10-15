@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/memoListFragment"
         android:name="com.sks.mymemo.memolist.MemoListFragment"
-        android:label="MemoListFragment"
+        android:label="전체메모 : {itemCount}"
         tools:layout="@layout/fragment_memo_list">
         <action
             android:id="@+id/action_memoListFragment_to_addMemoFragment"
@@ -29,6 +29,10 @@
         <argument
             android:name="TimeMill"
             app:argType="long" />
+        <argument
+            android:name="itemCount"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/addMemoFragment"
