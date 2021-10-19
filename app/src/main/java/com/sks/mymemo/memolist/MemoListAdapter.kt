@@ -11,6 +11,7 @@ import com.sks.mymemo.R
 import com.sks.mymemo.database.Memo
 
 class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
+
     var data = listOf<Memo>()
         set(value){
             field = value
@@ -28,14 +29,11 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
                 val memoTimeMill = item.dateTimeMill
                 val action = MemoListFragmentDirections.actionMemoListFragmentToUpdateMemoFragment(memoTimeMill)
                 v!!.findNavController().navigate(action)
-
             }
         })
 
         holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
             override fun onLongClick(v: View?): Boolean {
-                Log.d("TAG","롱클릭 테스트${item.dateTimeMill}")
-                //MemoListViewModel().isVisibilityAllTrue()
                 for(index in 0..data.size-1){
                     data[index].isVisibility = true
                 }

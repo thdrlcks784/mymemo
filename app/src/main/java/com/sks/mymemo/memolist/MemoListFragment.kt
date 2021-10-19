@@ -1,6 +1,7 @@
 package com.sks.mymemo.memolist
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sks.mymemo.MainActivity
 import com.sks.mymemo.R
+import com.sks.mymemo.TempToolbarTitleListener
+import com.sks.mymemo.Util
 import com.sks.mymemo.database.Memo
 import com.sks.mymemo.database.MemoDatabase
 import com.sks.mymemo.databinding.FragmentMemoListBinding
@@ -22,8 +25,6 @@ import kotlinx.android.synthetic.main.fragment_memo_list.*
 import kotlinx.android.synthetic.main.item_memo_list.*
 
 class MemoListFragment : Fragment(){
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,15 +62,14 @@ class MemoListFragment : Fragment(){
             }
         })
 
-        //(requireActivity() as MainActivity).toolbar.
 
-
-        //item이 없거나 없어졌을때 EmptyTextView를 띄우기 위함
+        //adapterObserver
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
 
             override fun onChanged() {
                 super.onChanged()
                 checkEmpty()
+                updateTitle()
             }
 
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
@@ -85,6 +85,12 @@ class MemoListFragment : Fragment(){
             fun checkEmpty(){
                 item_empty_text.visibility = (if(adapter.itemCount==0)View.VISIBLE else View.GONE)
             }
+
+            //title 출력
+            fun updateTitle(){
+                (activity as TempToolbarTitleListener).updateTitle("전체 메모 :  ${adapter.itemCount}" )
+            }
+
         })
 
 

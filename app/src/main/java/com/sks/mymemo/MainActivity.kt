@@ -12,8 +12,14 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+interface TempToolbarTitleListener{
+    fun updateTitle(title: String)
+}
 
+
+class MainActivity : AppCompatActivity() , TempToolbarTitleListener{
+
+    lateinit var toolbar : Toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,17 +32,16 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(navController.graph,drawer_layout
         )
-        findViewById<Toolbar>(R.id.toolbar)
-            .setupWithNavController(navController, appBarConfiguration)
 
-        //val navController = this.findNavController(R.id.nav_host_fragment)
-        //NavigationUI.setupActionBarWithNavController(this,navController)
+        toolbar = findViewById(R.id.toolbar)
+        toolbar.setupWithNavController(navController, appBarConfiguration)
+
 
     }
 
-    /*override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
-    }*/
+    override fun updateTitle(title: String) {
+        toolbar.title = title
+    }
+
+
 }

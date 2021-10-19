@@ -47,4 +47,14 @@ class Util() {
         }
 
     }
+
+    fun showKeyBoard(context : Context){
+        try{
+            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        } catch (e: java.lang.Exception){
+            e.printStackTrace()
+        }
+    }
+
 }

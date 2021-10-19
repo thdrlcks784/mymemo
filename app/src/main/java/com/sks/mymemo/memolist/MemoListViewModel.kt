@@ -15,7 +15,6 @@ class MemoListViewModel (
         application: Application) : AndroidViewModel(application){
 
         private var memoList = MutableLiveData<Memo?>()
-
         val allMemoList = database.getALLMemo()
 
 
@@ -24,7 +23,6 @@ class MemoListViewModel (
         private fun initializeMemoList(){
                 viewModelScope.launch{
                         memoList.value = getMemoListFromDatabase()
-                        Log.d("TAG","mewModel init ${database.getLastMemo()}")
                 }
         }
         private suspend fun getMemoListFromDatabase(): Memo?{
@@ -36,6 +34,7 @@ class MemoListViewModel (
         private suspend fun insert(newMemo: Memo) {
                 database.insert(newMemo)
         }
+
 
 
 }
