@@ -25,7 +25,8 @@ interface MemoDatabaseDao {
     @Query("SELECT * FROM memo_table ORDER BY dateTimeMill DESC LIMIT 1")
     suspend fun getLastMemo(): Memo?
 
-    @Query("SELECT * FROM memo_table ORDER BY dateTimeMill DESC")
+    @Query("SELECT * FROM memo_table ORDER BY `current_date` DESC")
     fun getALLMemo(): LiveData<List<Memo>>
+
 
 }

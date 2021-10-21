@@ -1,11 +1,14 @@
 package com.sks.mymemo.memolist
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.Toolbar
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -26,12 +29,13 @@ import kotlinx.android.synthetic.main.item_memo_list.*
 
 class MemoListFragment : Fragment(){
 
+    val adapter = MemoListAdapter()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val binding = DataBindingUtil.inflate<FragmentMemoListBinding>(
             inflater, R.layout.fragment_memo_list,container,false)
 
@@ -42,9 +46,7 @@ class MemoListFragment : Fragment(){
             view.findNavController().navigate(R.id.action_memoListFragment_to_addMemoFragment)
         }
 
-        //item이 없을때 띄워줄 EmptyTextView
-        val adapter = MemoListAdapter()
-        //binding.itemEmptyText.visibility = View.GONE
+
         binding.memoList.adapter = adapter
 
 
@@ -61,7 +63,6 @@ class MemoListFragment : Fragment(){
                 adapter.data = it
             }
         })
-
 
         //adapterObserver
         adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver(){
@@ -88,15 +89,37 @@ class MemoListFragment : Fragment(){
 
             //title 출력
             fun updateTitle(){
-                (activity as TempToolbarTitleListener).updateTitle("전체 메모 :  ${adapter.itemCount}" )
+                (activity as TempToolbarTitleListener).updateTitle("모든 노트 ${adapter.itemCount} 개" )
             }
-
         })
 
 
         return binding.root
     }
 
+    private lateinit var callback: OnBackPressedCallback
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d("TAG","눌렸다~")
+                if(adapter.data[0]?.isVisibility){
+                    for(index in 0..adapter.data.size-1){
+                        adapter.data[index].isVisibility = false
+                    }
+                    adapter.notifyDataSetChanged()
+                }else{
+                    requireActivity().finish()
+                }
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
 }

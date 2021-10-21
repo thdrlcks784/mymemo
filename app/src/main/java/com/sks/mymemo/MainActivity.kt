@@ -16,6 +16,9 @@ interface TempToolbarTitleListener{
     fun updateTitle(title: String)
 }
 
+interface BackPressedListener{
+}
+
 
 class MainActivity : AppCompatActivity() , TempToolbarTitleListener{
 

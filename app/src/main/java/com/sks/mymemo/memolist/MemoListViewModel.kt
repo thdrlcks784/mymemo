@@ -18,7 +18,7 @@ class MemoListViewModel (
         val allMemoList = database.getALLMemo()
 
 
-        init{ initializeMemoList() }
+        init{ initializeMemoList()}
 
         private fun initializeMemoList(){
                 viewModelScope.launch{

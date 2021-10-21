@@ -41,10 +41,15 @@ class UpdateMemoFragment : Fragment() {
         val viewModelFactory = UpdateMemoViewModelFactory(dataSource,application,timeMill)
         val updateMemoViewModel = ViewModelProvider(this, viewModelFactory).get(UpdateMemoViewModel::class.java)
 
+        var preTitle : String = ""
+        var preContents : String = ""
+
         updateMemoViewModel._memo.observe(viewLifecycleOwner, Observer{
             it?.let{
-                binding.updateMemoTitle.setText(it.title)
-                binding.updateMemoContents.setText(it.contents)
+                preTitle = it.title
+                preContents = it.contents
+                binding.updateMemoTitle.setText(preTitle)
+                binding.updateMemoContents.setText(preContents)
             }
         })
 
@@ -53,7 +58,9 @@ class UpdateMemoFragment : Fragment() {
 
         binding.updateMemoFab.setOnClickListener{ view: View ->
             view.findNavController().navigate(R.id.action_updateMemoFragment_to_memoListFragment)
-            updateMemoViewModel.onUpdateMemo(binding.updateMemoContents.text.toString(),binding.updateMemoTitle.text.toString(),timeMill)
+            if(!(binding.updateMemoContents.text.toString().equals(preContents)&&binding.updateMemoTitle.text.toString().equals(preTitle))){
+                updateMemoViewModel.onUpdateMemo(binding.updateMemoContents.text.toString(),binding.updateMemoTitle.text.toString(),timeMill)
+            }
             context?.let{ util.hideKeyboard(it,view) }
         }
         binding.lifecycleOwner = this

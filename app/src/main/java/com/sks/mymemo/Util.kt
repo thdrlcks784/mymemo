@@ -1,19 +1,18 @@
 package com.sks.mymemo
 
-import android.app.Activity
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
 import android.content.Context
+import android.util.Log
 import android.view.View
+import android.view.animation.TranslateAnimation
 import android.view.inputmethod.InputMethodManager
 import android.widget.CheckBox
 import android.widget.TextView
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import androidx.room.ColumnInfo
 import com.sks.mymemo.database.Memo
-import org.w3c.dom.Text
-import java.lang.ref.WeakReference
-import java.text.SimpleDateFormat
 import java.util.*
+
 
 class ItemMemoListViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!!) {
 
@@ -27,10 +26,16 @@ class ItemMemoListViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!
         date?.text = memo.currentDate
         contents?.text = memo.contents
         if(memo.isVisibility){
-            check?.visibility = View.VISIBLE
+            /*val anim = TranslateAnimation(-check!!.width.toFloat()*1.416f,0f,0f,0f)
+            anim.duration = 600
+            anim.fillAfter = true
+            title!!.animation = anim
+            date!!.animation = anim
+            check!!.animation = anim*/
+            check!!.visibility = View.VISIBLE
         }
         else{
-            check?.visibility = View.GONE
+            check!!.visibility = View.GONE
         }
     }
 }

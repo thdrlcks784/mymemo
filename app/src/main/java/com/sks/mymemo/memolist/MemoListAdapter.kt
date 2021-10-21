@@ -26,18 +26,27 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
 
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                val memoTimeMill = item.dateTimeMill
-                val action = MemoListFragmentDirections.actionMemoListFragmentToUpdateMemoFragment(memoTimeMill)
-                v!!.findNavController().navigate(action)
+                if(data[0].isVisibility){
+                    holder.check!!.isChecked = !holder.check!!.isChecked
+                }else{
+                    val memoTimeMill = item.dateTimeMill
+                    val action = MemoListFragmentDirections.actionMemoListFragmentToUpdateMemoFragment(memoTimeMill)
+                    v!!.findNavController().navigate(action)
+                }
+
             }
         })
 
         holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
             override fun onLongClick(v: View?): Boolean {
-                for(index in 0..data.size-1){
-                    data[index].isVisibility = true
+                if(data[0].isVisibility){
+                    holder.check!!.isChecked = !holder.check!!.isChecked
+                } else{
+                    for(index in 0..data.size-1){
+                        data[index].isVisibility = true
+                    }
+                    notifyDataSetChanged()
                 }
-                notifyDataSetChanged()
                 return true
             }
         })
@@ -48,5 +57,6 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
         val view = layoutInflater.inflate(R.layout.item_memo_list,parent,false)
         return ItemMemoListViewHolder(view)
     }
+
 
 }

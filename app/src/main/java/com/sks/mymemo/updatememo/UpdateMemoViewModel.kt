@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.sks.mymemo.database.Memo
 import com.sks.mymemo.database.MemoDatabaseDao
 import com.sks.mymemo.memolist.MemoListAdapter
+import com.sks.mymemo.memolist.MemoListViewModel
 import kotlinx.coroutines.launch
 
 class UpdateMemoViewModel (
