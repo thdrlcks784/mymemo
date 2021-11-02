@@ -27,5 +27,5 @@ data class Memo(
     var contents : String,
 
     @ColumnInfo(name = "memo_isVisibility")
-    var isVisibility : Boolean = false
+    var isVisibility : Int = 0
 )

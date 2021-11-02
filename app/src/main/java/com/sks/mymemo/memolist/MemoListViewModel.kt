@@ -7,7 +7,9 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sks.mymemo.database.Memo
+import com.sks.mymemo.database.MemoCheckBox
 import com.sks.mymemo.database.MemoDatabaseDao
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 class MemoListViewModel (
@@ -33,6 +35,19 @@ class MemoListViewModel (
 
         private suspend fun insert(newMemo: Memo) {
                 database.insert(newMemo)
+        }
+
+        fun deleteMemoList(checkBoxList : ArrayList<MemoCheckBox>){
+                for(index in checkBoxList.indices){
+                        if(checkBoxList[index].checked){
+                                Log.d("TAG", "index : $index , flag : ${checkBoxList[index].checked} ,  timeMill : ${checkBoxList[index].id}")
+                                viewModelScope.launch { delete(checkBoxList[index].id) }
+                        }
+                }
+        }
+
+        private suspend fun delete(dateTimeMill : Long){
+                database.delete(dateTimeMill)
         }
 
 
