@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/memoListFragment"
-        android:name="com.sks.mymemo.memolist.MemoListFragment"
+        android:name="com.sks.mymemo.allmemo.memolist.MemoListFragment"
         tools:layout="@layout/fragment_memo_list">
         <action
             android:id="@+id/action_memoListFragment_to_addMemoFragment"
@@ -32,8 +32,8 @@
     </fragment>
     <fragment
         android:id="@+id/addMemoFragment"
-        android:name="com.sks.mymemo.addmemo.AddMemoFragment"
-        android:label="AddMemoFragment"
+        android:name="com.sks.mymemo.allmemo.addmemo.AddMemoFragment"
+        android:label="메모를 추가하자!"
         tools:layout="@layout/fragment_add_memo">
         <action
             android:id="@+id/action_addMemoFragment_to_memoListFragment"
@@ -45,8 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateMemoFragment"
-        android:name="com.sks.mymemo.updatememo.UpdateMemoFragment"
-        android:label="UpdateMemoFragment"
+        android:name="com.sks.mymemo.allmemo.updatememo.UpdateMemoFragment"
         tools:layout="@layout/fragment_update_memo">
         <argument
             android:name="TimeMill"
@@ -58,5 +57,10 @@
             app:popUpToInclusive="true"
             app:enterAnim="@anim/slide_in_left"
             app:exitAnim="@anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/secretMemoListFragment"
+        android:name="com.sks.mymemo.secretmemo.secretmemolist.SecretMemoListFragment"
+        tools:layout="@layout/fragment_secret_memo_list" >
     </fragment>
 </navigation>

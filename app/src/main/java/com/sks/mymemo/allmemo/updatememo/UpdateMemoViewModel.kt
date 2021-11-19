@@ -1,14 +1,12 @@
-package com.sks.mymemo.updatememo
+package com.sks.mymemo.allmemo.updatememo
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.sks.mymemo.database.Memo
-import com.sks.mymemo.database.MemoDatabaseDao
-import com.sks.mymemo.memolist.MemoListAdapter
-import com.sks.mymemo.memolist.MemoListViewModel
+import com.sks.mymemo.database.allmemodatabase.Memo
+import com.sks.mymemo.database.allmemodatabase.MemoDatabaseDao
 import kotlinx.coroutines.launch
 
 class UpdateMemoViewModel (

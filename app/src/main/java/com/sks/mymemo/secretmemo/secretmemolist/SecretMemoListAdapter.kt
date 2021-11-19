@@ -1,5 +1,4 @@
-package com.sks.mymemo.memolist
-
+package com.sks.mymemo.secretmemo.secretmemolist
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,16 +6,17 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sks.mymemo.ItemMemoListViewHolder
+import com.sks.mymemo.ItemSecretMemoListViewHolder
 import com.sks.mymemo.R
 import com.sks.mymemo.database.AnimationFlag
-import com.sks.mymemo.database.Memo
 import com.sks.mymemo.database.MemoCheckBox
+import com.sks.mymemo.database.secretmemodatabase.SecretMemo
+import com.sks.mymemo.allmemo.memolist.MemoListFragmentDirections
 
-
-class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
+class SecretMemoListAdapter : RecyclerView.Adapter<ItemSecretMemoListViewHolder>() {
 
     interface ItemLongClickListener{
-        fun itemLongClicked(v:View,position: Int) : Boolean
+        fun itemLongClicked(v: View, position: Int) : Boolean
     }
 
     private lateinit var listener:ItemLongClickListener
@@ -26,7 +26,7 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
     }
 
 
-    var data = listOf<Memo>()
+    var data = listOf<SecretMemo>()
         set(value){
             field = value
             notifyDataSetChanged()
@@ -36,7 +36,7 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: ItemMemoListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemSecretMemoListViewHolder, position: Int) {
         val item = data[position]
         holder?.bind(item,checkBoxList,position)
 
@@ -68,19 +68,12 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
             listener.itemLongClicked(it,position)
         }
 
-        /*holder.itemView.setOnLongClickListener(object : View.OnLongClickListener{
-            override fun onLongClick(v: View?): Boolean {
-
-
-                return true
-            }
-        })*/
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMemoListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSecretMemoListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.item_memo_list,parent,false)
-        return ItemMemoListViewHolder(view)
+        return ItemSecretMemoListViewHolder(view)
     }
 
 

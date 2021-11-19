@@ -1,11 +1,8 @@
-package com.sks.mymemo.memolist
+package com.sks.mymemo.allmemo.memolist
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,11 +10,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.sks.mymemo.R
 import com.sks.mymemo.TempToolbarTitleListener
 import com.sks.mymemo.database.AnimationFlag
-import com.sks.mymemo.database.MemoDatabase
+import com.sks.mymemo.database.allmemodatabase.MemoDatabase
 import com.sks.mymemo.databinding.FragmentMemoListBinding
 import kotlinx.android.synthetic.main.fragment_memo_list.*
 
@@ -65,6 +61,7 @@ class MemoListFragment : Fragment(){
                 if (adapter.data[0].isVisibility == AnimationFlag().doneVisible) {
                     memoListViewModel.deleteMemoList(adapter.checkBoxList)
                     adapter.notifyDataSetChanged()
+                    adapter.checkBoxList.clear()
                     onBackPressedEvent()
                 } else {
                     view.findNavController()
@@ -76,10 +73,8 @@ class MemoListFragment : Fragment(){
 
         adapter.setItemLongClickListener(object : MemoListAdapter.ItemLongClickListener{
             override fun itemLongClicked(v: View, position: Int): Boolean {
-                Log.d("TAG", "longClick 실행")
                 if (adapter.data.isNotEmpty()) {
                     if (adapter.data[0].isVisibility  !=AnimationFlag().doneVisible) {
-                        Log.d("TAG", "ic_delete_outline 실행")
                         binding.fab.setImageResource(R.drawable.ic_delete_outline)
                     }
                 }
@@ -95,19 +90,16 @@ class MemoListFragment : Fragment(){
                 super.onChanged()
                 checkEmpty()
                 updateTitle()
-                Log.d("TAG","onChanged 실행")
             }
 
             override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
                 super.onItemRangeInserted(positionStart, itemCount)
                 checkEmpty()
-                Log.d("TAG","onItemRangeInserted 실행")
             }
 
             override fun onItemRangeRemoved(positionStart: Int, itemCount: Int) {
                 super.onItemRangeRemoved(positionStart, itemCount)
                 checkEmpty()
-                Log.d("TAG","onItemRangeRemoved 실행")
             }
             //item이 없을때 띄워줄 EmptyTextView
             fun checkEmpty(){
@@ -128,10 +120,16 @@ class MemoListFragment : Fragment(){
         if(adapter.data.isNotEmpty()){
             if(adapter.data[0].isVisibility == AnimationFlag().doneGone)requireActivity().finish()
             else{
+                //fab button ImageResource + 아이콘으로 변경
                 binding.fab.setImageResource(R.drawable.ic_add)
-                Log.d("TAG","ic_add 실행")
+
+                //item slideOut animation 실행
                 for(index in adapter.data.indices){
                     adapter.data[index].isVisibility = AnimationFlag().doSlideOutGone
+                }
+
+                //checkBox check 전체해제
+                for(index in adapter.checkBoxList.indices){
                     adapter.checkBoxList[index].checked = false
                 }
                 adapter.notifyItemRangeChanged(0,adapter.data.size)
@@ -155,5 +153,6 @@ class MemoListFragment : Fragment(){
         super.onDetach()
         callback.remove()
     }
+
 
 }

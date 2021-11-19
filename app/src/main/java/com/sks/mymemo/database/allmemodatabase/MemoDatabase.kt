@@ -1,4 +1,4 @@
-package com.sks.mymemo.database
+package com.sks.mymemo.database.allmemodatabase
 
 import android.content.Context
 import androidx.room.Database
@@ -15,7 +15,7 @@ abstract class MemoDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: MemoDatabase? = null
 
-        fun getInstance(context: Context): MemoDatabase{
+        fun getInstance(context: Context): MemoDatabase {
             synchronized(this){
                 var instance = INSTANCE
 

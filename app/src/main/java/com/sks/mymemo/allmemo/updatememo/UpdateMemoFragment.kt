@@ -1,4 +1,4 @@
-package com.sks.mymemo.updatememo
+package com.sks.mymemo.allmemo.updatememo
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,10 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.sks.mymemo.R
+import com.sks.mymemo.TempToolbarTitleListener
 import com.sks.mymemo.Util
-import com.sks.mymemo.database.MemoDatabase
+import com.sks.mymemo.database.allmemodatabase.MemoDatabase
 import com.sks.mymemo.databinding.FragmentUpdateMemoBinding
-import com.sks.mymemo.memolist.MemoListFragmentArgs
 
 class UpdateMemoFragment : Fragment() {
 
@@ -50,8 +50,11 @@ class UpdateMemoFragment : Fragment() {
                 preContents = it.contents
                 binding.updateMemoTitle.setText(preTitle)
                 binding.updateMemoContents.setText(preContents)
+                (activity as TempToolbarTitleListener).updateTitle("${it.firstCreatedDate} 생성" )
             }
         })
+
+
 
 
         binding.updateMemoViewModel = updateMemoViewModel

@@ -1,4 +1,4 @@
-package com.sks.mymemo.database
+package com.sks.mymemo.database.allmemodatabase
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

@@ -1,17 +1,15 @@
-package com.sks.mymemo.addmemo
+package com.sks.mymemo.allmemo.addmemo
 
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.*
-import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.sks.mymemo.R
 import com.sks.mymemo.Util
-import com.sks.mymemo.database.MemoDatabase
+import com.sks.mymemo.database.allmemodatabase.MemoDatabase
 import com.sks.mymemo.databinding.FragmentAddMemoBinding
 
 

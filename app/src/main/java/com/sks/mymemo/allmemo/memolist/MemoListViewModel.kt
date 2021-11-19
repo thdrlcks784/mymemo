@@ -1,15 +1,13 @@
-package com.sks.mymemo.memolist
+package com.sks.mymemo.allmemo.memolist
 
 import android.app.Application
-import android.provider.SyncStateContract.Helpers.insert
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.sks.mymemo.database.Memo
+import com.sks.mymemo.database.allmemodatabase.Memo
 import com.sks.mymemo.database.MemoCheckBox
-import com.sks.mymemo.database.MemoDatabaseDao
-import kotlinx.coroutines.async
+import com.sks.mymemo.database.allmemodatabase.MemoDatabaseDao
 import kotlinx.coroutines.launch
 
 class MemoListViewModel (

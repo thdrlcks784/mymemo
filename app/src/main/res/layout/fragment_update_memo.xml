@@ -6,13 +6,13 @@
     <data>
         <variable
             name="updateMemoViewModel"
-            type="com.sks.mymemo.updatememo.UpdateMemoViewModel" />
+            type="com.sks.mymemo.allmemo.updatememo.UpdateMemoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.sks.mymemo.updatememo.UpdateMemoFragment">
+        tools:context=".allmemo.updatememo.UpdateMemoFragment">
 
         <EditText
             android:id="@+id/update_memo_title"

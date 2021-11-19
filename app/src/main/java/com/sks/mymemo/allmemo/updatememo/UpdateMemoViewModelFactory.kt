@@ -1,10 +1,9 @@
-package com.sks.mymemo.updatememo
+package com.sks.mymemo.allmemo.updatememo
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.sks.mymemo.addmemo.AddMemoViewModel
-import com.sks.mymemo.database.MemoDatabaseDao
+import com.sks.mymemo.database.allmemodatabase.MemoDatabaseDao
 import java.lang.IllegalArgumentException
 
 class UpdateMemoViewModelFactory (private val dataSource: MemoDatabaseDao,
