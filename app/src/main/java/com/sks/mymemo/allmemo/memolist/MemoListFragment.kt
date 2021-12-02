@@ -2,7 +2,9 @@ package com.sks.mymemo.allmemo.memolist
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -33,13 +35,9 @@ class MemoListFragment : Fragment(){
             inflater, R.layout.fragment_memo_list,container,false)
         binding.lifecycleOwner = this
 
-
-
         binding.memoList.adapter = adapter
 
-
-
-
+        Log.d("TAG","지금 타임 : ${System.currentTimeMillis()}")
         //애플리케이션 컨텍스트에 대한 참조를 가져옴
         val application = requireNotNull(this.activity).application
         //DAO에 대한 참조를 통해 데이터 소스에 대한 참조를 가져옴
@@ -59,10 +57,12 @@ class MemoListFragment : Fragment(){
                 view.findNavController().navigate(R.id.action_memoListFragment_to_addMemoFragment)
             } else {
                 if (adapter.data[0].isVisibility == AnimationFlag().doneVisible) {
-                    memoListViewModel.deleteMemoList(adapter.checkBoxList)
+                    memoListViewModel.deleteMemoList(adapter.checkBoxList,adapter.data)
                     adapter.notifyDataSetChanged()
                     adapter.checkBoxList.clear()
                     onBackPressedEvent()
+                    showToast("휴지통에 들어간 메모는\n" +
+                            "15일후에 자동으로 삭제됩니다")
                 } else {
                     view.findNavController()
                         .navigate(R.id.action_memoListFragment_to_addMemoFragment)
@@ -135,6 +135,12 @@ class MemoListFragment : Fragment(){
                 adapter.notifyItemRangeChanged(0,adapter.data.size)
             }
         }
+    }
+
+    private fun showToast(text : String){
+        val toast = Toast.makeText(activity, text, Toast.LENGTH_LONG)
+        toast.setGravity(Gravity.CENTER, Gravity.CENTER_HORIZONTAL, Gravity.CENTER_VERTICAL)
+        toast.show()
     }
 
     private lateinit var callback: OnBackPressedCallback

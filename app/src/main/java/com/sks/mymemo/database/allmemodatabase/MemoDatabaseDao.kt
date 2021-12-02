@@ -28,8 +28,20 @@ interface MemoDatabaseDao {
     @Query("DELETE from memo_table WHERE dateTimeMill = :key")
     suspend fun delete(key: Long)
 
-    @Query("SELECT * FROM memo_table ORDER BY `current_date` DESC")
+    @Query("DELETE from memo_table WHERE memo_trash_flag == 1")
+    suspend fun deleteAll()
+
+    @Query("UPDATE memo_table SET memo_trash_flag = 0, to_trash_date = 0 WHERE dateTimeMill = :key")
+    suspend fun updateToCommonMemo(key: Long)
+
+    @Query("UPDATE memo_table SET memo_trash_flag = 1, to_trash_date = :date WHERE dateTimeMill = :key")
+    suspend fun updateToTrashMemo(key: Long,date: Long)
+
+    @Query("SELECT * FROM memo_table WHERE memo_trash_flag == 0 ORDER BY `current_date` DESC")
     fun getALLMemo(): LiveData<List<Memo>>
+
+    @Query("SELECT * FROM memo_table WHERE memo_trash_flag == 1 ORDER BY `current_date` DESC")
+    fun getALLTrashMemo(): LiveData<List<Memo>>
 
 
 }

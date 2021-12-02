@@ -3,6 +3,7 @@ package com.sks.mymemo.database.allmemodatabase
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.sks.mymemo.database.MemoTrashFlag
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,5 +34,11 @@ data class Memo(
     var contents : String,
 
     @ColumnInfo(name = "memo_isVisibility")
-    var isVisibility : Int = 0
+    var isVisibility : Int = 0,
+
+    @ColumnInfo(name = "memo_trash_flag")
+    var memoTrashFrag : Int = MemoTrashFlag().commonMemo,
+
+    @ColumnInfo(name = "to_trash_date")
+    val toTrashDate : Long = 0
 )

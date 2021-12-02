@@ -5,12 +5,9 @@
         android:id="@+id/memoListFragment"
         android:icon="@drawable/ic_total_note"
         android:title="모든 노트" />
+
     <item
-        android:id="@+id/secretMemoListFragment"
-        android:icon="@drawable/ic_secret_note"
-        android:title="비밀 노트" />
-    <item
-        android:id="@+id/addMemoFragment"
+        android:id="@+id/trashMemoFragment"
         android:icon="@drawable/ic_trash_can"
         android:title="휴지통" />
 </menu>

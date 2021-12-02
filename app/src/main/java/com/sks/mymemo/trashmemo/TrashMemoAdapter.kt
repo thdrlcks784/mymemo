@@ -1,19 +1,16 @@
-package com.sks.mymemo.secretmemo.secretmemolist
+package com.sks.mymemo.trashmemo
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.sks.mymemo.ItemMemoListViewHolder
-import com.sks.mymemo.ItemSecretMemoListViewHolder
 import com.sks.mymemo.R
 import com.sks.mymemo.database.AnimationFlag
 import com.sks.mymemo.database.MemoCheckBox
-import com.sks.mymemo.database.secretmemodatabase.SecretMemo
-import com.sks.mymemo.allmemo.memolist.MemoListFragmentDirections
+import com.sks.mymemo.database.allmemodatabase.Memo
 
-class SecretMemoListAdapter : RecyclerView.Adapter<ItemSecretMemoListViewHolder>() {
+class TrashMemoAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
 
     interface ItemLongClickListener{
         fun itemLongClicked(v: View, position: Int) : Boolean
@@ -26,7 +23,7 @@ class SecretMemoListAdapter : RecyclerView.Adapter<ItemSecretMemoListViewHolder>
     }
 
 
-    var data = listOf<SecretMemo>()
+    var data = listOf<Memo>()
         set(value){
             field = value
             notifyDataSetChanged()
@@ -36,10 +33,9 @@ class SecretMemoListAdapter : RecyclerView.Adapter<ItemSecretMemoListViewHolder>
 
     override fun getItemCount() = data.size
 
-    override fun onBindViewHolder(holder: ItemSecretMemoListViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ItemMemoListViewHolder, position: Int) {
         val item = data[position]
         holder?.bind(item,checkBoxList,position)
-
 
 
         holder.itemView.setOnClickListener(object : View.OnClickListener{
@@ -47,12 +43,7 @@ class SecretMemoListAdapter : RecyclerView.Adapter<ItemSecretMemoListViewHolder>
                 if(data[0].isVisibility== AnimationFlag().doneVisible){
                     checkBoxList[position].checked = !holder.check!!.isChecked
                     holder.check!!.isChecked = !holder.check!!.isChecked
-                }else{
-                    val memoTimeMill = item.dateTimeMill
-                    val action = MemoListFragmentDirections.actionMemoListFragmentToUpdateMemoFragment(memoTimeMill)
-                    v!!.findNavController().navigate(action)
                 }
-
             }
         })
 
@@ -70,10 +61,10 @@ class SecretMemoListAdapter : RecyclerView.Adapter<ItemSecretMemoListViewHolder>
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemSecretMemoListViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemMemoListViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val view = layoutInflater.inflate(R.layout.item_memo_list,parent,false)
-        return ItemSecretMemoListViewHolder(view)
+        return ItemMemoListViewHolder(view)
     }
 
 

@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         //appBarConfiguration = AppBarConfiguration(navController.graph,drawer_layout,setOf(R.id.secretMemoListFragment))
-        appBarConfiguration = AppBarConfiguration(setOf(R.id.memoListFragment, R.id.secretMemoListFragment),drawer_layout)
+        appBarConfiguration = AppBarConfiguration(setOf(R.id.memoListFragment, R.id.trashMemoFragment),drawer_layout)
         toolbar = findViewById(R.id.toolbar)
         toolbar.setupWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
@@ -71,15 +71,10 @@ class MainActivity : AppCompatActivity() , NavigationView.OnNavigationItemSelect
                 toolbar.setBackgroundColor(Color.parseColor("#e9e9e9"))
                 drawer_layout.closeDrawer(GravityCompat.START)
             }
-            R.id.secretMemoListFragment ->{
-                Log.d("TAG","secret Click")
-                navController.navigate(R.id.secretMemoListFragment)
-                toolbar.setBackgroundColor(Color.parseColor("#808080"))
-                drawer_layout.closeDrawer(GravityCompat.START)
-            }
-            R.id.addMemoFragment ->{
+
+            R.id.trashMemoFragment ->{
                 Log.d("TAG","trashCan Click")
-                navController.navigate(R.id.addMemoFragment)
+                navController.navigate(R.id.trashMemoFragment)
                 drawer_layout.closeDrawer(GravityCompat.START)
             }
         }

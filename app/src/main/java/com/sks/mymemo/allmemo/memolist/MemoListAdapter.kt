@@ -1,6 +1,7 @@
 package com.sks.mymemo.allmemo.memolist
 
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,7 +45,8 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
 
         holder.itemView.setOnClickListener(object : View.OnClickListener{
             override fun onClick(v: View?) {
-                if(data[0].isVisibility== AnimationFlag().doneVisible){
+                Log.d("TAG","Flag : ${item.memoTrashFrag}")
+                if(data[0].isVisibility>= AnimationFlag().doSlideInVisible){
                     checkBoxList[position].checked = !holder.check!!.isChecked
                     holder.check!!.isChecked = !holder.check!!.isChecked
                 }else{
@@ -64,6 +66,7 @@ class MemoListAdapter: RecyclerView.Adapter<ItemMemoListViewHolder>() {
                     data[index].isVisibility = AnimationFlag().doSlideInVisible
                 }
                 notifyItemRangeChanged(0,data.size)
+                Log.d("TAG","datasize : ${data.size}")
             }
             listener.itemLongClicked(it,position)
         }

@@ -7,15 +7,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.sks.mymemo.database.allmemodatabase.Memo
 import com.sks.mymemo.database.MemoCheckBox
+import com.sks.mymemo.database.MemoTrashFlag
 import com.sks.mymemo.database.allmemodatabase.MemoDatabaseDao
 import kotlinx.coroutines.launch
 
 class MemoListViewModel (
-        val database: MemoDatabaseDao,
+        val memoDatabase: MemoDatabaseDao,
         application: Application) : AndroidViewModel(application){
 
         private var memoList = MutableLiveData<Memo?>()
-        val allMemoList = database.getALLMemo()
+        val allMemoList = memoDatabase.getALLMemo()
 
 
         init{ initializeMemoList()}
@@ -26,26 +27,28 @@ class MemoListViewModel (
                 }
         }
         private suspend fun getMemoListFromDatabase(): Memo?{
-                var memo = database.getLastMemo()
+                var memo = memoDatabase.getLastMemo()
                 return memo
         }
 
 
         private suspend fun insert(newMemo: Memo) {
-                database.insert(newMemo)
+                memoDatabase.insert(newMemo)
         }
 
-        fun deleteMemoList(checkBoxList : ArrayList<MemoCheckBox>){
+        fun deleteMemoList(checkBoxList : ArrayList<MemoCheckBox>, data : List<Memo>){
                 for(index in checkBoxList.indices){
                         if(checkBoxList[index].checked){
-                                Log.d("TAG", "index : $index , flag : ${checkBoxList[index].checked} ,  timeMill : ${checkBoxList[index].id}")
+                                //data[index].memoTrashFrag = MemoTrashFlag().trashMemo
+                                //Log.d("TAG", "index : $index , flag : ${checkBoxList[index].checked} ,  timeMill : ${checkBoxList[index].id} , trashFlag : ${data[index].memoTrashFrag}")
                                 viewModelScope.launch { delete(checkBoxList[index].id) }
                         }
                 }
         }
 
+
         private suspend fun delete(dateTimeMill : Long){
-                database.delete(dateTimeMill)
+                memoDatabase.updateToTrashMemo(dateTimeMill,System.currentTimeMillis())
         }
 
 

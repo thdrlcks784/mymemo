@@ -59,8 +59,7 @@
             app:exitAnim="@anim/slide_out_right"/>
     </fragment>
     <fragment
-        android:id="@+id/secretMemoListFragment"
-        android:name="com.sks.mymemo.secretmemo.secretmemolist.SecretMemoListFragment"
-        tools:layout="@layout/fragment_secret_memo_list" >
-    </fragment>
+        android:id="@+id/trashMemoFragment"
+        android:name="com.sks.mymemo.trashmemo.TrashMemoFragment"
+        android:label="TrashMemoFragment" />
 </navigation>
