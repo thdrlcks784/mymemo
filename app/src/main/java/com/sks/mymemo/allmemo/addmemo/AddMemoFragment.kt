@@ -28,7 +28,6 @@ class AddMemoFragment : Fragment(){
             inflater, R.layout.fragment_add_memo,container,false)
         //util
         val util = Util()
-
         //애플리케이션 컨텍스트에 대한 참조를 가져옴
         val application = requireNotNull(this.activity).application
         //DAO에 대한 참조를 통해 데이터 소스에 대한 참조를 가져옴
@@ -44,19 +43,8 @@ class AddMemoFragment : Fragment(){
             context?.let { util.hideKeyboard(it,view) }
         }
         binding.lifecycleOwner = this
-        //setHasOptionsMenu(true)
 
         return binding.root
     }
 
-
-    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.options_menu,menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return NavigationUI.onNavDestinationSelected(item,requireView().findNavController()) || super.onOptionsItemSelected(item)
-    }*/
 }

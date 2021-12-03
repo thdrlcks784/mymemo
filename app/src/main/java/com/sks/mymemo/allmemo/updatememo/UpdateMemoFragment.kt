@@ -67,7 +67,6 @@ class UpdateMemoFragment : Fragment() {
             context?.let{ util.hideKeyboard(it,view) }
         }
         binding.lifecycleOwner = this
-        //setHasOptionsMenu(true)
 
         return binding.root
     }

@@ -63,14 +63,17 @@ class TrashMemoFragment : Fragment(){
 
         binding.buttonEmptyTrash.setOnClickListener {
             trashMemoListViewModel.deleteAllMemoList()
+            onBackPressedEvent()
         }
 
         binding.buttonDeleteSeleted.setOnClickListener{
             trashMemoListViewModel.deleteMemoList(adapter.checkBoxList)
+            onBackPressedEvent()
         }
 
         binding.buttonRecoverySeleted.setOnClickListener{
             trashMemoListViewModel.recoveryMemoList(adapter.checkBoxList)
+            onBackPressedEvent()
         }
 
 
@@ -113,8 +116,6 @@ class TrashMemoFragment : Fragment(){
         if(adapter.data.isNotEmpty()){
             if(adapter.data[0].isVisibility == AnimationFlag().doneGone)requireActivity().finish()
             else{
-                //fab button ImageResource + 아이콘으로 변경
-                //binding.fab.setImageResource(R.drawable.ic_add)
 
                 binding.buttonPanel.isVisible = false
 
@@ -129,6 +130,9 @@ class TrashMemoFragment : Fragment(){
                 }
                 adapter.notifyItemRangeChanged(0,adapter.data.size)
             }
+        }
+        else{
+            requireActivity().finish()
         }
     }
 

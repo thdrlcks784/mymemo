@@ -40,7 +40,7 @@ interface MemoDatabaseDao {
     @Query("SELECT * FROM memo_table WHERE memo_trash_flag == 0 ORDER BY `current_date` DESC")
     fun getALLMemo(): LiveData<List<Memo>>
 
-    @Query("SELECT * FROM memo_table WHERE memo_trash_flag == 1 ORDER BY `current_date` DESC")
+    @Query("SELECT * FROM memo_table WHERE memo_trash_flag == 1 ORDER BY `to_trash_date` DESC")
     fun getALLTrashMemo(): LiveData<List<Memo>>
 
 

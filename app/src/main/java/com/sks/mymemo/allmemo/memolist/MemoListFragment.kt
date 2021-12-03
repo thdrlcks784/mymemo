@@ -2,7 +2,6 @@ package com.sks.mymemo.allmemo.memolist
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -37,7 +36,7 @@ class MemoListFragment : Fragment(){
 
         binding.memoList.adapter = adapter
 
-        Log.d("TAG","지금 타임 : ${System.currentTimeMillis()}")
+
         //애플리케이션 컨텍스트에 대한 참조를 가져옴
         val application = requireNotNull(this.activity).application
         //DAO에 대한 참조를 통해 데이터 소스에 대한 참조를 가져옴
@@ -56,7 +55,7 @@ class MemoListFragment : Fragment(){
             if (adapter.data.isEmpty()) {
                 view.findNavController().navigate(R.id.action_memoListFragment_to_addMemoFragment)
             } else {
-                if (adapter.data[0].isVisibility == AnimationFlag().doneVisible) {
+                if (adapter.data[0].isVisibility >= AnimationFlag().doSlideInVisible) {
                     memoListViewModel.deleteMemoList(adapter.checkBoxList,adapter.data)
                     adapter.notifyDataSetChanged()
                     adapter.checkBoxList.clear()
@@ -134,6 +133,9 @@ class MemoListFragment : Fragment(){
                 }
                 adapter.notifyItemRangeChanged(0,adapter.data.size)
             }
+        }
+        else{
+            requireActivity().finish()
         }
     }
 

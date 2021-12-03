@@ -65,22 +65,15 @@ class ItemMemoListViewHolder(itemView: View?): RecyclerView.ViewHolder(itemView!
 
     private fun onStartSlideInAnimation(){
         check!!.animation = slideInCheckBox()
-        //title!!.animation = slideInTitle()
-        //date!!.animation = slideInTitle()
     }
 
     private fun onStartSlideOutAnimation(){
-        //title!!.animation = slideOutTitle()
-        //date!!.animation = slideOutTitle()
         check!!.animation= slideOutCheckBox()
     }
 
 
-
-    private fun slideInTitle() = AnimationUtils.loadAnimation(itemView.context,R.anim.slide_in_left_memo_title)
     private fun slideInCheckBox() = AnimationUtils.loadAnimation(itemView.context,R.anim.slide_in_left_memo_checkbox)
 
-    private fun slideOutTitle() = AnimationUtils.loadAnimation(itemView.context,R.anim.slide_out_left_memo_title)
     private fun slideOutCheckBox() = AnimationUtils.loadAnimation(itemView.context,R.anim.slide_out_left_memo_checkbox)
 
 }
@@ -93,19 +86,9 @@ class Util() {
             val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm?.hideSoftInputFromWindow(view.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
         } catch (e: Exception) {
-            // TODO: handle exception
             e.printStackTrace()
         }
 
-    }
-
-    fun showKeyBoard(context : Context){
-        try{
-            val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-        } catch (e: java.lang.Exception){
-            e.printStackTrace()
-        }
     }
 
 }
